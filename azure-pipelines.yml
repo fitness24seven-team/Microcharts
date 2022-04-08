@@ -51,7 +51,6 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'Sources/Microcharts/Microcharts.csproj'
-    includesymbols: true
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
@@ -59,7 +58,6 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
-    includesymbols: true
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
