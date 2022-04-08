@@ -37,12 +37,14 @@ steps:
   inputs:
     command: 'build'
     projects: 'Sources/Microcharts/Microcharts.csproj'
+    arguments: '-c Release'
 
 - task: DotNetCoreCLI@2
   displayName: build forms
   inputs:
     command: 'build'
     projects: 'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
+    arguments: '-c Release'
 
 - task: DotNetCoreCLI@2
   displayName: pack core
