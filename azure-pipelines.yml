@@ -18,14 +18,14 @@ steps:
 - task: gitversion/execute@0
 
 - task: DotNetCoreCLI@2
-  displayName: restore
+  displayName: restore core
   inputs:
     command: 'restore'
     projects: 'Sources/Microcharts/Microcharts.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
-  displayName: restore
+  displayName: restore forms
   inputs:
     command: 'restore'
     projects: 'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
@@ -33,32 +33,32 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: build
+  displayName: build core
   inputs:
     command: 'build'
     projects: 'Sources/Microcharts/Microcharts.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: build
+  displayName: build forms
   inputs:
     command: 'build'
     projects: 'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: pack
+  displayName: pack core
   inputs:
     command: 'pack'
     packagesToPack: 'Sources/Microcharts/Microcharts.csproj'
     includesymbols: true
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
-  displayName: pack
+  displayName: pack forms
   inputs:
     command: 'pack'
     packagesToPack: 'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
     includesymbols: true
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
   displayName: push to feed
