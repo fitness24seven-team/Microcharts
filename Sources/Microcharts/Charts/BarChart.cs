@@ -28,6 +28,8 @@ namespace Microcharts
 
         #region Properties
 
+        private const int CORNERRADIUS = 25;
+
         /// <summary>
         /// Gets or sets the bar background area alpha.
         /// </summary>
@@ -79,7 +81,7 @@ namespace Microcharts
             {
                 (SKPoint location, SKSize size) = GetBarDrawingProperties(headerHeight, itemSize, barSize, origin, barX, barY);
                 var rect = SKRect.Create(location, size);
-                canvas.DrawRect(rect, paint);
+                canvas.DrawRoundRect(new SKRoundRect(rect, CORNERRADIUS), paint);
             }
         }
 
@@ -114,7 +116,7 @@ namespace Microcharts
                     var max = value > 0 ? headerHeight : headerHeight + itemSize.Height;
                     var height = Math.Abs(max - barY);
                     var y = Math.Min(max, barY);
-                    canvas.DrawRect(SKRect.Create(barX - (itemSize.Width / 2), y, barSize.Width, height), paint);
+                    canvas.DrawRoundRect(new SKRoundRect(SKRect.Create(barX - (itemSize.Width / 2), y, barSize.Width, height), CORNERRADIUS), paint);
                 }
             }
         }
