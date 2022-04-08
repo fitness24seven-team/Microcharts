@@ -10,12 +10,28 @@ pool:
   vmImage: windows-latest
 
 steps:
-- task: NuGetCommand@2
+
+- task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    restoreSolution: '**/*.sln'
+    projects: 'Sources/Microcharts/Microcharts.csproj'
+    feedsToUse: 'select'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '**\*.sln'
-    vsVersion: '17.0'
+    command: 'build'
+    projects: 'Sources/Microcharts/Microcharts.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    includesymbols: true
+    versioningScheme: 'off'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'e78193ab-d5a9-437a-b947-6a7096fe9790'
