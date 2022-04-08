@@ -11,24 +11,36 @@ pool:
 
 steps:
 
+- task: gitversion/setup@0
+  inputs:
+    versionSpec: '5.x'
+
+- task: gitversion/execute@0
+
 - task: DotNetCoreCLI@2
   displayName: restore
   inputs:
     command: 'restore'
-    projects: 'Sources/Microcharts/Microcharts.csproj'
+    projects: |
+      'Sources/Microcharts/Microcharts.csproj'
+      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
   displayName: build
   inputs:
     command: 'build'
-    projects: 'Sources/Microcharts/Microcharts.csproj'
+    projects: |
+      'Sources/Microcharts/Microcharts.csproj'
+      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: pack
   inputs:
     command: 'pack'
-    packagesToPack: 'Sources/Microcharts/Microcharts.csproj'
+    packagesToPack: | 
+      'Sources/Microcharts/Microcharts.csproj'
+      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
     includesymbols: true
     versioningScheme: 'off'
 
