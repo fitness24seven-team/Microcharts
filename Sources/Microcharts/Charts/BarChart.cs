@@ -1,4 +1,4 @@
-﻿// Copyright (c) Aloïs DENIEL. All rights reserved.
+// Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -33,6 +33,8 @@ namespace Microcharts
         /// </summary>
         /// <value>The bar area alpha.</value>
         public byte BarAreaAlpha { get; set; } = 32;
+
+        private const int CORNERRADIUS = 25;
 
         #endregion
 
@@ -81,7 +83,7 @@ namespace Microcharts
                         }
 
                         var rect = SKRect.Create(x, y, itemSize.Width, height);
-                        canvas.DrawRect(rect, paint);
+                        canvas.DrawRoundRect(new SKRoundRect(rect, CORNERRADIUS), paint);
                     }
                 }
             }
@@ -112,7 +114,7 @@ namespace Microcharts
                         var max = entry.Value > 0 ? headerHeight : headerHeight + itemSize.Height;
                         var height = Math.Abs(max - point.Y);
                         var y = Math.Min(max, point.Y);
-                        canvas.DrawRect(SKRect.Create(point.X - (itemSize.Width / 2), y, itemSize.Width, height), paint);
+                        canvas.DrawRoundRect(new SKRoundRect(SKRect.Create(point.X - (itemSize.Width / 2), y, itemSize.Width, height), CORNERRADIUS), paint);
                     }
                 }
             }
