@@ -22,8 +22,8 @@ steps:
   inputs:
     command: 'restore'
     projects: |
-      'Sources/Microcharts/Microcharts.csproj'
-      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
+      '**/Microcharts.csproj'
+      '**/Microcharts.Forms.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
@@ -31,16 +31,16 @@ steps:
   inputs:
     command: 'build'
     projects: |
-      'Sources/Microcharts/Microcharts.csproj'
-      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
+      '**/Microcharts.csproj'
+      '**/Microcharts.Forms.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: pack
   inputs:
     command: 'pack'
     packagesToPack: | 
-      'Sources/Microcharts/Microcharts.csproj'
-      'Sources/Microcharts.Forms/Microcharts.Forms.csproj'
+      '**/Microcharts.csproj'
+      '**/Microcharts.Forms.csproj'
     includesymbols: true
     versioningScheme: 'off'
 
