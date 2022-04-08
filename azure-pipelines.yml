@@ -12,24 +12,28 @@ pool:
 steps:
 
 - task: DotNetCoreCLI@2
+  displayName: restore
   inputs:
     command: 'restore'
     projects: 'Sources/Microcharts/Microcharts.csproj'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
+  displayName: build
   inputs:
     command: 'build'
     projects: 'Sources/Microcharts/Microcharts.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: pack
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: 'Sources/Microcharts/Microcharts.csproj'
     includesymbols: true
     versioningScheme: 'off'
 
 - task: DotNetCoreCLI@2
+  displayName: push to feed
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
