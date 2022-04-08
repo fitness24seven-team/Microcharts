@@ -7,23 +7,10 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: 'Sources/Microcharts.Droid/Microcharts.Droid.csproj'
-
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'pack'
-      packagesToPack: 'NuGet/Microcharts.Core.nuspec'
-      versioningScheme: 'off'
-
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'push'
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-      nuGetFeedType: 'internal'
-      publishVstsFeed: 'e78193ab-d5a9-437a-b947-6a7096fe9790'
+- task: VSBuild@1
+  inputs:
+    solution: '**\*.sln'
+    vsVersion: '17.0'
