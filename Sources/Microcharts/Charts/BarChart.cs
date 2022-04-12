@@ -28,7 +28,7 @@ namespace Microcharts
 
         #region Properties
 
-        private const int CORNERRADIUS = 25;
+        private const int CORNERRADIUS = 15;
 
         /// <summary>
         /// Gets or sets the bar background area alpha.
